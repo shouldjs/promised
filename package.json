@@ -1,0 +1,32 @@
+{
+  "name": "should-promised",
+  "version": "0.0.1",
+  "description": "Some sort of promise assertion helpers",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter mocha-better-spec-reporter test/**.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shouldjs/should-promised.git"
+  },
+  "keywords": [
+    "should",
+    "promise"
+  ],
+  "author": "Denis Bardadym <bardadymchik@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shouldjs/should-promised/issues"
+  },
+  "homepage": "https://github.com/shouldjs/should-promised",
+  "devDependencies": {
+    "mocha-better-spec-reporter": "latest",
+    "mocha": "latest",
+    "should": "latest",
+    "bluebird": "^2.0.7"
+  },
+  "peerDependencies": {
+    "should": ">= 4.x"
+  }
+}

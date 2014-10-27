@@ -26,7 +26,7 @@ describe('Should - Promised', function() {
   it('should allow to use .not and .any', function() {
     return promised({ a: 10, b: 'abc' }).should.finally.not.have.any.of.properties('c', 'd')
       .and.have.property('a', 10);
-  })
+  });
 
   it('should treat assertion like promise', function() {
     return Promise.all([
@@ -34,4 +34,8 @@ describe('Should - Promised', function() {
       promised('abc').should.finally.be.a.String
     ])
   })
-})
+
+  it('should fail as usual', function() {
+    //return promised('abc').should.finally.not.be.String;
+  })
+});

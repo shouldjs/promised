@@ -9,14 +9,8 @@ Object.defineProperty(should.Assertion.prototype, 'finally', {
 });
 
 function PromisedAssertion(obj) {
-  this.obj = obj;
-
   should.Assertion.apply(this, arguments);
 }
-
-PromisedAssertion.prototype = {
-  copy: should.Assertion.prototype.copy
-};
 
 function constructValueCall(name) {
   return function() {
@@ -24,6 +18,7 @@ function constructValueCall(name) {
     this.obj = this.obj.then(function(a) {
       return a[name].apply(a, args);
     });
+
     return this;
   }
 }
@@ -39,14 +34,14 @@ function constructGetCall(name) {
 }
 
 var methodsBlacklist = {
-  copy: true,
   constructor: true,
   getMessage: true,
-  copyIfMissing: true
+  formattedObj: true
 };
 
 for(var name in should.Assertion.prototype) {
   if(name in methodsBlacklist) continue;
+
   var desc = Object.getOwnPropertyDescriptor(should.Assertion.prototype, name);
 
   if(desc.get) {

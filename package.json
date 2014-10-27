@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/shouldjs/should-promised.git"
+    "url": "git://github.com/shouldjs/spromised.git"
   },
   "keywords": [
     "should",
@@ -17,9 +17,9 @@
   "author": "Denis Bardadym <bardadymchik@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shouldjs/should-promised/issues"
+    "url": "https://github.com/shouldjs/promised/issues"
   },
-  "homepage": "https://github.com/shouldjs/should-promised",
+  "homepage": "https://github.com/shouldjs/promised",
   "devDependencies": {
     "mocha-better-spec-reporter": "latest",
     "mocha": "latest",

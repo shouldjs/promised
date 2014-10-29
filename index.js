@@ -4,9 +4,20 @@ var util = require('should/lib/util');
 Object.defineProperty(should.Assertion.prototype, 'finally', {
   get: function() {
     this.obj.then.should.be.a.Function;
-    return new PromisedAssertion(this.obj.then(should));
+    var that = this;
+
+    return new PromisedAssertion(this.obj.then(function(obj) {
+      var a = should(obj);
+
+      a.negate = that.negate;
+      a.anyOne = that.anyOne;
+
+      return a;
+    }));
   }
 });
+
+should.Assertion.alias('finally', 'eventually');
 
 function PromisedAssertion(obj) {
   should.Assertion.apply(this, arguments);

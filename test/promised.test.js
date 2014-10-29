@@ -33,9 +33,13 @@ describe('Should - Promised', function() {
       promised(10).should.finally.be.a.Number,
       promised('abc').should.finally.be.a.String
     ])
-  })
+  });
 
-  it('should fail as usual', function() {
-    //return promised('abc').should.finally.not.be.String;
-  })
+  it('should propagate .not before .finally', function() {
+    return promised(10).should.not.finally.be.a.String;
+  });
+
+  it('should be possible to use .eventually as an alias for .finally', function() {
+    return promised(10).should.eventually.be.a.Number;
+  });
 });

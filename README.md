@@ -3,7 +3,7 @@ should-promised
 
 There some helpers for asserting promises.
 
-## .finally
+## .finally or .eventually
 
 This method begin assertions for promises, all next .chain calls will be shortcuts for .thenable calls on promise.
 
@@ -20,3 +20,8 @@ Promise.all([
   promised('abc').should.finally.be.a.String
 ])
 ```
+
+## Before .finally
+
+Everything you did before .finally saved into new assertion (but that is not quite usefull as object will be promise).
+Main idea is to save `.not` and `.any`.

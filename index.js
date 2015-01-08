@@ -88,6 +88,91 @@ Object.defineProperty(should.Assertion.prototype, 'rejected', {
 });
 
 /**
+ * Assert given promise will be rejected with some sort of error. Arguments is the same for Assertion#throw
+ *
+ * @name rejectedWith
+ * @memberOf Assertion
+ * @category assertion promises
+ * @module should-promised
+ * @returns {Promise}
+ * @example
+ *
+ * function failedPromise() {
+ *   return new Promise(function(resolve, reject) {
+ *     reject(new Error('boom'));
+ *   })
+ * }
+ * failedPromise().should.be.rejectedWith(Error);
+ * failedPromise().should.be.rejectedWith('boom');
+ * failedPromise().should.be.rejectedWith(/boom/);
+ * failedPromise().should.be.rejectedWith(Error, { message: 'boom' });
+ * failedPromise().should.be.rejectedWith({ message: 'boom' });
+ */
+should.Assertion.prototype.rejectedWith = function(message, properties) {
+  this.params = {operator: 'to be rejected'};
+
+  this.obj.should.be.a.Promise;
+
+  var that = this;
+  return this.obj.then(function(value) {
+    if(!that.negate) {
+      that.fail();
+    }
+    return value;
+  }, function next$onError(err) {
+    if(that.negate) {
+      that.fail();
+    }
+
+    var errorMatched = true, errorInfo = '';
+
+    if('string' == typeof message) {
+      errorMatched = message == err.message;
+    } else if(message instanceof RegExp) {
+      errorMatched = message.test(err.message);
+    } else if('function' == typeof message) {
+      errorMatched = err instanceof message;
+    } else if(util.isObject(message)) {
+      try {
+        err.should.match(message);
+      } catch(e) {
+        if(e instanceof should.AssertionError) {
+          errorInfo = ": " + e.message;
+          errorMatched = false;
+        } else {
+          throw e;
+        }
+      }
+    }
+
+    if(!errorMatched) {
+      if('string' == typeof message || message instanceof RegExp) {
+        errorInfo = " with a message matching " + i(message) + ", but got '" + err.message + "'";
+      } else if('function' == typeof message) {
+        errorInfo = " of type " + util.functionName(message) + ", but got " + util.functionName(err.constructor);
+      }
+    } else if('function' == typeof message && properties) {
+      try {
+        err.should.match(properties);
+      } catch(e) {
+        if(e instanceof should.AssertionError) {
+          errorInfo = ": " + e.message;
+          errorMatched = false;
+        } else {
+          throw e;
+        }
+      }
+    }
+
+    that.params.operator += errorInfo;
+
+    that.assert(errorMatched);
+
+    return err;
+  })
+};
+
+/**
  * Assert given object is promise and wrap it in PromisedAssertion, which has all properties of should.Assertion. That means you can chain as with usual Assertion.
  *
  * @name finally

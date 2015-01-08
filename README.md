@@ -3,6 +3,34 @@ should-promised
 
 There some helpers for asserting promises.
 
+## .Promise
+
+Assert given object is promise
+
+## .fulfilled
+
+Assert given promise will be fulfilled. It will return promise.
+
+```
+it('should be allow to check if promise fulfilled', function() {
+  return promised(10).should.be.fulfilled;
+});
+```
+
+## .rejected
+
+Assert given promise will be rejected. It will return promise.
+
+```
+it('should be allow to check if promise rejected', function() {
+  return promiseFail().should.be.rejected;
+});
+```
+
+## .rejectedWith
+
+Assert given promise will be rejected with matched Error. Arguments are the same as Assertion\#throw.
+
 ## .finally or .eventually
 
 This method begin assertions for promises, all next .chain calls will be shortcuts for .thenable calls on promise.

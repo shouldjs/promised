@@ -58,7 +58,7 @@ Object.defineProperty(should.Assertion.prototype, 'fulfilled', {
 /**
  * Assert given promise will be rejected
  *
- * @name fulfilled
+ * @name rejected
  * @memberOf Assertion
  * @category assertion promises
  * @module should-promised

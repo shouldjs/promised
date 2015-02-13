@@ -17,10 +17,14 @@ var util = require('should/lib/util');
 should.Assertion.add('Promise', function() {
   this.params = {operator: 'to be promise'};
 
+  var obj = this.obj;
+
   this.have.property('then')
     .which.is.a.Function
     .and.have.property('length')
     .which.is.above(1);
+
+  this.obj = obj;
 }, true);
 
 /**
@@ -68,7 +72,7 @@ Object.defineProperty(should.Assertion.prototype, 'fulfilled', {
  */
 Object.defineProperty(should.Assertion.prototype, 'rejected', {
   get: function() {
-    this.params = {operator: 'to be rejected'};
+    this.params = { operator: 'to be rejected'};
 
     this.obj.should.be.a.Promise;
 
@@ -132,7 +136,7 @@ should.Assertion.prototype.rejectedWith = function(message, properties) {
       errorMatched = message.test(err.message);
     } else if('function' == typeof message) {
       errorMatched = err instanceof message;
-    } else if(util.isObject(message)) {
+    } else if(message != null && typeof message == 'object') {
       try {
         err.should.match(message);
       } catch(e) {
@@ -229,13 +233,8 @@ function constructGetCall(name) {
   }
 }
 
-var methodsBlacklist = {
-  constructor: true,
-  getMessage: true
-};
 
 for(var name in should.Assertion.prototype) {
-  if(name in methodsBlacklist) continue;
 
   var desc = Object.getOwnPropertyDescriptor(should.Assertion.prototype, name);
 

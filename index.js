@@ -19,12 +19,10 @@ should.Assertion.add('Promise', function() {
 
   var obj = this.obj;
 
-  this.have.property('then')
+  obj.should.have.property('then')
     .which.is.a.Function
     .and.have.property('length')
     .which.is.above(1);
-
-  this.obj = obj;
 }, true);
 
 /**

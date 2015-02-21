@@ -1,3 +1,9 @@
+21/02/2015 - 0.1.0
+==================
+
+ * In .Promise do not use current context
+ * Added umd wrapper
+
 13/02/2015 - 0.0.5
 ==================
 

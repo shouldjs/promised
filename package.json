@@ -1,8 +1,8 @@
 {
   "name": "should-promised",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Some sort of promise assertion helpers",
-  "main": "index.js",
+  "main": "should-promised.js",
   "scripts": {
     "test": "mocha --reporter mocha-better-spec-reporter test/**.test.js"
   },

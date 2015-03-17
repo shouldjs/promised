@@ -98,6 +98,37 @@
   });
 
   /**
+   * Assert given promise will be fulfilled with some expected value.
+   *
+   * @name fulfilledWith
+   * @memberOf Assertion
+   * @category assertion promises
+   * @module should-promised
+   * @returns {Promise}
+   * @example
+   * (new Promise(function(resolve, reject) { resolve(10); })).should.be.fulfilledWith(10);
+   */
+  should.Assertion.prototype.fulfilledWith = function(expectedValue) {
+    this.params = {operator: 'to be fulfilled'};
+
+    this.obj.should.be.a.Promise;
+
+    var that = this;
+    return this.obj.then(function (value) {
+      if(that.negate) {
+        that.fail();
+      }
+      value.should.eql(expectedValue);
+      return value;
+    }, function next$onError(err) {
+      if(!that.negate) {
+        that.fail();
+      }
+      return err;
+    });
+  };
+
+  /**
    * Assert given promise will be rejected with some sort of error. Arguments is the same for Assertion#throw
    *
    * @name rejectedWith

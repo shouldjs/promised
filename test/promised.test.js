@@ -66,6 +66,23 @@ it('should be allow to check if promise fulfilled', function() {
   ]);
 });
 
+it('should be allow to check if promise is fulfilledWith a value', function() {
+  return Promise.all([
+    promised(10).should.be.fulfilledWith(10), //positive
+    promiseFail().should.be.fulfilledWith(10).then(function(value) {//negative
+      should.fail();
+    }, function(err) {
+      err.should.be.Error.and.match({message: 'expected [Promise] to be fulfilled'});
+    }),
+    promised(10).should.not.be.fulfilledWith(10).then(function(value) {//positive fail
+      should.fail();
+    }, function(err) {
+      err.should.be.Error.and.match({message: 'expected [Promise] not to be fulfilled'});
+    }),
+    promiseFail().should.not.be.fulfilledWith(10)//negative fail
+  ]);
+});
+
 it('should be allow to check if promise rejected', function() {
   return Promise.all([
     promiseFail().should.be.rejected, //positive

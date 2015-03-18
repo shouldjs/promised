@@ -17,6 +17,16 @@ it('should be allow to check if promise fulfilled', function() {
 });
 ```
 
+## .fulfilledWith
+
+Assert given promise will be fulfilled with an expected value. It will return promise.
+
+```
+it('should be allow to check if promise fulfilledWith an expected value', function() {
+  return promised(10).should.be.fulfilledWith(10);
+});
+```
+
 ## .rejected
 
 Assert given promise will be rejected. It will return promise.

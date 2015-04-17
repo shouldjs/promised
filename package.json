@@ -1,6 +1,6 @@
 {
   "name": "should-promised",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Some sort of promise assertion helpers",
   "main": "should-promised.js",
   "scripts": {

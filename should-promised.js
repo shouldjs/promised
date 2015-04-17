@@ -29,8 +29,7 @@
 
     obj.should.have.property('then')
       .which.is.a.Function
-      .and.have.property('length')
-      .which.is.above(1);
+      .and.have.property('length');
   }, true);
 
   /**

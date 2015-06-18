@@ -18,19 +18,18 @@
    * @module should-promised
    * @example
    *
-   * promise.should.be.Promise;
-   * (new Promise(function(resolve, reject) { resolve(10); })).should.be.a.Promise;
-   * (10).should.not.be.a.Promise;
+   * promise.should.be.Promise();
+   * (new Promise(function(resolve, reject) { resolve(10); })).should.be.a.Promise();
+   * (10).should.not.be.a.Promise();
    */
   should.Assertion.add('Promise', function () {
     this.params = {operator: 'to be promise'};
 
     var obj = this.obj;
 
-    obj.should.have.property('then')
-      .which.is.a.Function
-      .and.have.property('length');
-  }, true);
+    should(obj).have.property('then')
+      .which.is.a.Function;
+  });
 
   /**
    * Assert given promise will be fulfilled
@@ -41,28 +40,26 @@
    * @module should-promised
    * @returns {Promise}
    * @example
-   * (new Promise(function(resolve, reject) { resolve(10); })).should.be.fulfilled;
+   * (new Promise(function(resolve, reject) { resolve(10); })).should.be.fulfilled();
    */
-  Object.defineProperty(should.Assertion.prototype, 'fulfilled', {
-    get: function Assertion$fulfilled() {
-      this.params = {operator: 'to be fulfilled'};
+  should.Assertion.prototype.fulfilled = function Assertion$fulfilled() {
+    this.params = {operator: 'to be fulfilled'};
 
-      this.obj.should.be.a.Promise;
+    should(this.obj).be.a.Promise();
 
-      var that = this;
-      return this.obj.then(function (value) {
-        if(that.negate) {
-          that.fail();
-        }
-        return value;
-      }, function next$onError(err) {
-        if(!that.negate) {
-          that.fail();
-        }
-        return err;
-      })
-    }
-  });
+    var that = this;
+    return this.obj.then(function (value) {
+      if(that.negate) {
+        that.fail();
+      }
+      return value;
+    }, function next$onError(err) {
+      if(!that.negate) {
+        that.fail();
+      }
+      return err;
+    })
+  };
 
   /**
    * Assert given promise will be rejected
@@ -73,28 +70,26 @@
    * @module should-promised
    * @returns {Promise}
    * @example
-   * (new Promise(function(resolve, reject) { resolve(10); })).should.not.be.rejected;
+   * (new Promise(function(resolve, reject) { resolve(10); })).should.not.be.rejected();
    */
-  Object.defineProperty(should.Assertion.prototype, 'rejected', {
-    get: function () {
-      this.params = {operator: 'to be rejected'};
+  should.Assertion.prototype.rejected = function () {
+    this.params = {operator: 'to be rejected'};
 
-      this.obj.should.be.a.Promise;
+    should(this.obj).be.a.Promise();
 
-      var that = this;
-      return this.obj.then(function (value) {
-        if(!that.negate) {
-          that.fail();
-        }
-        return value;
-      }, function next$onError(err) {
-        if(that.negate) {
-          that.fail();
-        }
-        return err;
-      })
-    }
-  });
+    var that = this;
+    return this.obj.then(function (value) {
+      if(!that.negate) {
+        that.fail();
+      }
+      return value;
+    }, function next$onError(err) {
+      if(that.negate) {
+        that.fail();
+      }
+      return err;
+    })
+  };
 
   /**
    * Assert given promise will be fulfilled with some expected value.
@@ -110,14 +105,14 @@
   should.Assertion.prototype.fulfilledWith = function(expectedValue) {
     this.params = {operator: 'to be fulfilled'};
 
-    this.obj.should.be.a.Promise;
+    should(this.obj).be.a.Promise();
 
     var that = this;
     return this.obj.then(function (value) {
       if(that.negate) {
         that.fail();
       }
-      value.should.eql(expectedValue);
+      should(value).eql(expectedValue);
       return value;
     }, function next$onError(err) {
       if(!that.negate) {
@@ -151,7 +146,7 @@
   should.Assertion.prototype.rejectedWith = function (message, properties) {
     this.params = {operator: 'to be rejected'};
 
-    this.obj.should.be.a.Promise;
+    should(this.obj).be.a.Promise();
 
     var that = this;
     return this.obj.then(function (value) {
@@ -174,7 +169,7 @@
         errorMatched = err instanceof message;
       } else if(message != null && typeof message == 'object') {
         try {
-          err.should.match(message);
+          should(err).match(message);
         } catch(e) {
           if(e instanceof should.AssertionError) {
             errorInfo = ": " + e.message;
@@ -193,7 +188,7 @@
         }
       } else if('function' == typeof message && properties) {
         try {
-          err.should.match(properties);
+          should(err).match(properties);
         } catch(e) {
           if(e instanceof should.AssertionError) {
             errorInfo = ": " + e.message;
@@ -227,7 +222,7 @@
    */
   Object.defineProperty(should.Assertion.prototype, 'finally', {
     get: function () {
-      this.obj.should.be.a.Promise;
+      should(this.obj).be.a.Promise();
 
       var that = this;
 

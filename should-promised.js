@@ -28,7 +28,7 @@
     var obj = this.obj;
 
     obj.should.have.property('then')
-      .which.is.a.Function
+      .which.is.a.Function()
       .and.have.property('length');
   }, true);
 
@@ -47,7 +47,7 @@
     get: function Assertion$fulfilled() {
       this.params = {operator: 'to be fulfilled'};
 
-      this.obj.should.be.a.Promise;
+      this.obj.should.be.a.Promise();
 
       var that = this;
       return this.obj.then(function (value) {
@@ -79,7 +79,7 @@
     get: function () {
       this.params = {operator: 'to be rejected'};
 
-      this.obj.should.be.a.Promise;
+      this.obj.should.be.a.Promise();
 
       var that = this;
       return this.obj.then(function (value) {
@@ -110,7 +110,7 @@
   should.Assertion.prototype.fulfilledWith = function(expectedValue) {
     this.params = {operator: 'to be fulfilled'};
 
-    this.obj.should.be.a.Promise;
+    this.obj.should.be.a.Promise();
 
     var that = this;
     return this.obj.then(function (value) {
@@ -151,7 +151,7 @@
   should.Assertion.prototype.rejectedWith = function (message, properties) {
     this.params = {operator: 'to be rejected'};
 
-    this.obj.should.be.a.Promise;
+    this.obj.should.be.a.Promise();
 
     var that = this;
     return this.obj.then(function (value) {
@@ -227,7 +227,7 @@
    */
   Object.defineProperty(should.Assertion.prototype, 'finally', {
     get: function () {
-      this.obj.should.be.a.Promise;
+      this.obj.should.be.a.Promise();
 
       var that = this;
 

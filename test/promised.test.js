@@ -26,7 +26,7 @@ it('should determine if it is Promise', function() {
 
 it('should allow to chain calls like with usual assertion', function() {
   return promised('abc').should.finally.be.exactly('abc')
-    .and.be.a.String;
+    .and.be.a.String();
 });
 
 it('should allow to use .not and .any', function() {
@@ -36,17 +36,17 @@ it('should allow to use .not and .any', function() {
 
 it('should treat assertion like promise', function() {
   return Promise.all([
-    promised(10).should.finally.be.a.Number,
-    promised('abc').should.finally.be.a.String
+    promised(10).should.finally.be.a.Number(),
+    promised('abc').should.finally.be.a.String()
   ])
 });
 
 it('should propagate .not before .finally', function() {
-  return promised(10).should.not.finally.be.a.String;
+  return promised(10).should.not.finally.be.a.String();
 });
 
 it('should be possible to use .eventually as an alias for .finally', function() {
-  return promised(10).should.eventually.be.a.Number;
+  return promised(10).should.eventually.be.a.Number();
 });
 
 it('should be allow to check if promise fulfilled', function() {
@@ -55,12 +55,12 @@ it('should be allow to check if promise fulfilled', function() {
     promiseFail().should.be.fulfilled.then(function(value) {//negative
       should.fail();
     }, function(err) {
-      err.should.be.Error.and.match({message: 'expected [Promise] to be fulfilled'});
+      err.should.be.Error().and.match({message: 'expected [Promise] to be fulfilled'});
     }),
     promised(10).should.not.be.fulfilled.then(function(value) {//positive fail
       should.fail();
     }, function(err) {
-      err.should.be.Error.and.match({message: 'expected [Promise] not to be fulfilled'});
+      err.should.be.Error().and.match({message: 'expected [Promise] not to be fulfilled'});
     }),
     promiseFail().should.not.be.fulfilled//negative fail
   ]);
@@ -72,12 +72,12 @@ it('should be allow to check if promise is fulfilledWith a value', function() {
     promiseFail().should.be.fulfilledWith(10).then(function(value) {//negative
       should.fail();
     }, function(err) {
-      err.should.be.Error.and.match({message: 'expected [Promise] to be fulfilled'});
+      err.should.be.Error().and.match({message: 'expected [Promise] to be fulfilled'});
     }),
     promised(10).should.not.be.fulfilledWith(10).then(function(value) {//positive fail
       should.fail();
     }, function(err) {
-      err.should.be.Error.and.match({message: 'expected [Promise] not to be fulfilled'});
+      err.should.be.Error().and.match({message: 'expected [Promise] not to be fulfilled'});
     }),
     promiseFail().should.not.be.fulfilledWith(10)//negative fail
   ]);
@@ -89,12 +89,12 @@ it('should be allow to check if promise rejected', function() {
     promised(10).should.be.rejected.then(function(value) {//negative
       should.fail();
     }, function(err) {
-      err.should.be.Error.and.match({message: 'expected [Promise] to be rejected'});
+      err.should.be.Error().and.match({message: 'expected [Promise] to be rejected'});
     }),
     promiseFail().should.not.be.rejected.then(function(value) {//positive fail
       should.fail();
     }, function(err) {
-      err.should.be.Error.and.match({message: 'expected [Promise] not to be rejected'});
+      err.should.be.Error().and.match({message: 'expected [Promise] not to be rejected'});
     }),
     promised(10).should.not.be.rejected//negative fail
   ]);
@@ -107,7 +107,7 @@ it('should allow to match rejected error', function() {
     promiseFail().should.be.rejectedWith('boom1').then(function() {
       return should.fail();
     }, function(err) {
-      return err.should.be.Error.and.match({ message: 'expected [Promise] to be rejected with a message matching \'boom1\', but got \'boom\''})
+      return err.should.be.Error().and.match({ message: 'expected [Promise] to be rejected with a message matching \'boom1\', but got \'boom\''})
     }),
     promiseFail().should.be.rejectedWith(/boom/),
     promiseFail().should.be.rejectedWith(Error, { message: 'boom' }),
@@ -115,17 +115,17 @@ it('should allow to match rejected error', function() {
     promiseFail().should.not.be.rejectedWith().then(function(value) {//positive fail
       return should.fail();
     }, function(err) {
-      return err.should.be.Error.and.match({message: 'expected [Promise] not to be rejected'});
+      return err.should.be.Error().and.match({message: 'expected [Promise] not to be rejected'});
     }),
     promised(10).should.be.rejectedWith().then(function(value) {//negative fail
       return should.fail();
     }, function(err) {
-      return err.should.be.Error.and.match({message: 'expected [Promise] to be rejected'});
+      return err.should.be.Error().and.match({message: 'expected [Promise] to be rejected'});
     }),
     promiseFail().should.not.be.rejectedWith(Error).then(function(value) {//negative fail
       return should.fail();
     }, function(err) {
-      return err.should.be.Error.and.match({message: 'expected [Promise] not to be rejected'});
+      return err.should.be.Error().and.match({message: 'expected [Promise] not to be rejected'});
     }),
   ]);
 });

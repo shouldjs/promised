@@ -1,6 +1,6 @@
 {
   "name": "should-promised",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Some sort of promise assertion helpers",
   "main": "should-promised.js",
   "scripts": {
@@ -27,6 +27,6 @@
     "bluebird": "^2.0.7"
   },
   "peerDependencies": {
-    "should": ">= 4.x"
+    "should": ">= 7.x"
   }
 }

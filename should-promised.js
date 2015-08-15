@@ -28,7 +28,7 @@
     var obj = this.obj;
 
     should(obj).have.property('then')
-      .which.is.a.Function;
+      .which.is.a.Function();
   });
 
   /**

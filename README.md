@@ -13,7 +13,7 @@ Assert given promise will be fulfilled. It will return promise.
 
 ```
 it('should be allow to check if promise fulfilled', function() {
-  return promised(10).should.be.fulfilled;
+  return promised(10).should.be.fulfilled();
 });
 ```
 
@@ -33,7 +33,7 @@ Assert given promise will be rejected. It will return promise.
 
 ```
 it('should be allow to check if promise rejected', function() {
-  return promiseFail().should.be.rejected;
+  return promiseFail().should.be.rejected();
 });
 ```
 

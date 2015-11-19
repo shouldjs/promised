@@ -1,35 +1,35 @@
 should-promised
 ===============
 
-There some helpers for asserting promises.
+Define some helpers for asserting promises.
 
-## .Promise
+## .Promise()
 
-Assert given object is promise
+Assert that the given object is an instance of a Promise
 
-## .fulfilled
+## .fulfilled()
 
-Assert given promise will be fulfilled. It will return promise.
+Assert that the given promise will be fulfilled. It will return a promise.
 
-```
-it('should be allow to check if promise fulfilled', function() {
+```javascript
+it('should be allowed to check if promise fulfilled', function() {
   return promised(10).should.be.fulfilled();
 });
 ```
 
-## .fulfilledWith
+## .fulfilledWith(value)
 
-Assert given promise will be fulfilled with an expected value. It will return promise.
+Assert that the given promise will be fulfilled with an expected value. It will return a promise.
 
-```
+```javascript
 it('should be allow to check if promise fulfilledWith an expected value', function() {
   return promised(10).should.be.fulfilledWith(10);
 });
 ```
 
-## .rejected
+## .rejected()
 
-Assert given promise will be rejected. It will return promise.
+Assert that the given promise will be rejected. It will return a promise.
 
 ```
 it('should be allow to check if promise rejected', function() {
@@ -39,13 +39,13 @@ it('should be allow to check if promise rejected', function() {
 
 ## .rejectedWith
 
-Assert given promise will be rejected with matched Error. Arguments are the same as Assertion\#throw.
+Assert that the given promise will be rejected with the matched Error. Arguments are the same as Assertion\#throw.
 
 ## .finally or .eventually
 
 This method begin assertions for promises, all next .chain calls will be shortcuts for .thenable calls on promise.
 
-So you can do like this
+So you can do something like this
 
 ```js
 promised('abc').should.finally.be.exactly('abc')
@@ -61,5 +61,6 @@ Promise.all([
 
 ## Before .finally
 
-Everything you did before .finally saved into new assertion (but that is not quite usefull as object will be promise).
-Main idea is to save `.not` and `.any`.
+Everything you did before .finally is saved into a new assertion (but that is
+not quite as useful, as the object will be a promise). The main idea is to save
+`.not` and `.any`.

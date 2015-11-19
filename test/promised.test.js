@@ -5,19 +5,19 @@ var Promise = require('bluebird');
 function promised(value) {
   return new Promise(function(resolve, reject) {
     resolve(value);
-  })
+  });
 }
 
 function promiseFail() {
   return new Promise(function(resolve, reject) {
-    reject(new Error('boom'))
+    reject(new Error('boom'));
   });
 }
 
 
 it('should return new assertion to hold promise', function() {
   var a = promised('abc').should.finally;
-  return a.then.should.be.a.Function;
+  return a.then.should.be.a.Function();
 });
 
 it('should determine if it is Promise', function() {
@@ -37,8 +37,8 @@ it('should allow to use .not and .any', function() {
 it('should treat assertion like promise', function() {
   return Promise.all([
     promised(10).should.finally.be.a.Number(),
-    promised('abc').should.finally.be.a.String()
-  ])
+    promised('abc').should.finally.be.a.String(),
+  ]);
 });
 
 it('should propagate .not before .finally', function() {
@@ -107,7 +107,7 @@ it('should allow to match rejected error', function() {
     promiseFail().should.be.rejectedWith('boom1').then(function() {
       return should.fail();
     }, function(err) {
-      return err.should.be.Error().and.match({ message: 'expected [Promise] to be rejected with a message matching \'boom1\', but got \'boom\''})
+      return err.should.be.Error().and.match({ message: 'expected [Promise] to be rejected with a message matching \'boom1\', but got \'boom\''});
     }),
     promiseFail().should.be.rejectedWith(/boom/),
     promiseFail().should.be.rejectedWith(Error, { message: 'boom' }),
